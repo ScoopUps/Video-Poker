@@ -10,6 +10,46 @@ main {
   width: 1300px;
 }
 
+#header {
+  border: 1px solid purple;
+  height: 200px;
+  width: 1300px;
+  display: flex;
+}
+
+#winninghands {
+  height: 200px;
+  width: 425px;
+  background-color: mediumblue;
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px black;
+  border-right: 3px solid black;
+}
+
+#winninghands p {
+  margin-left: 15px;
+  margin-top: 15px;
+  line-height: 1px;
+}
+
+#payouts {
+  height: 200px;
+  width: 225px;
+  background-color: mediumblue;
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px black;
+  border-right: 3px solid black;
+}
+
+#payouts p {
+  text-align: right;
+  margin-right: 15px;
+  margin-top: 15px;
+  line-height: 1px;
+}
+
 #boardhold {
   width: 1202px;
   height: 373px;
@@ -38,7 +78,7 @@ main {
 }
 
 .placeholder {
-  background-color: seagreen;
+  background-color: black;
   height: 300px;
   width: 200px;
   border-radius: 10px;
@@ -83,8 +123,9 @@ main {
 #bottombar {
   border: 1px solid green;
   width: 1300px;
-  height: 100px;
+  height: 80px;
   display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -93,11 +134,21 @@ main {
   color: white;
   font-size: 30px;
   text-shadow: 2px 2px black;
-  width: 300px;
-  height: 60px;
+  width: 250px;
+  height: 50px;
   text-align: center;
-  line-height: 60px;
+  line-height: 50px;
   box-shadow: 1px 1px 1px 1px rgba(0,0,0,.5);
+}
+
+#betmax {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #FFD700;
+  color: white;
+  font-size: 30px;
+  text-shadow: 2px 2px black;
+  width: 200px;
+  height: 53px;
 }
 
 #deal {
@@ -106,6 +157,6 @@ main {
   color: white;
   font-size: 30px;
   text-shadow: 2px 2px black;
-  width: 100px;
-  height: 60px;
+  width: 200px;
+  height: 53px;
 }

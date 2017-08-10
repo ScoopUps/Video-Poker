@@ -31,5 +31,9 @@ $(document).ready(function(){
   }
 )
 
+  $('#betmax').click(function(){
+    shuffle(deck);
+    popBoard();
+  })
 
 });

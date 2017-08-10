@@ -62,7 +62,57 @@ function popBoard (){
   }
 }
 
-shuffle(deck);
-popBoard();
-console.log(board);
-console.log(deck);
+$(document).ready(function(){
+  console.log('Ready freddy');
+
+
+  //click event for the hold buttons
+  $('.hold').click(function(){
+    //store id of clicked hold button
+    let $holdNum = $(this).attr('id');
+    //store index of clicked hold to use on board array
+    let index = parseInt($holdNum.charAt(4));
+    //conditional to toggle the hold from true/false and vice versa
+    if (board[index].held === false){
+      board[index].held = true;
+    }else if(board[index].held === true){
+      board[index].held = false;
+    }
+    alert(board[index].held);
+  })
+
+   $('.card').click(function(){
+    //store id of clicked hold button
+    let $holdNum = $(this).attr('id');
+    //store index of clicked hold to use on board array
+    let index = parseInt($holdNum.charAt(4));
+    //conditional to toggle the hold from true/false and vice versa
+    if (board[index].held === false){
+      board[index].held = true;
+    }else if(board[index].held === true){
+      board[index].held = false;
+    }
+    alert(board[index].held);
+   }
+ )
+
+  $('#betmax').click(function(){
+    credits -= 5;
+    $('output').html(credits);
+    shuffle(deck);
+    popBoard();
+    let $card1 = $('#card1');
+    let $card2 = $('#card2');
+    let $card3 = $('#card3');
+    let $card4 = $('#card4');
+    let $card5 = $('#card5');
+    let $cards = [$card1, $card2, $card3, $card4, $card5];
+    for(let p = 0; p<board.length; p++){
+      $cards[p].removeClass('placeholder');
+      $cards[p].css('color', board[p].color);
+      $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
+    }
+    $('#betmax').unbind('click');
+  })
+
+});

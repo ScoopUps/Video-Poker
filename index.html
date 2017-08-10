@@ -5,31 +5,56 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="events.js"></script>
+  <!-- <script type="text/javascript" src="events.js"></script> -->
   <script type="text/javascript" src="game.js"></script>
 </head>
 <body>
   <main>
-  <section id="boardhold">
-    <section id="board">
-      <div class="card placeholder" id="card1"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
-      <div class="card placeholder" id="card2"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
-      <div class="card placeholder" id="card3"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
-      <div class="card placeholder" id="card4"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
-      <div class="card placeholder" id="card5"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
+    <section id="header">
+      <div id="winninghands">
+        <p>Royal Flush</p>
+        <p>Straight Flush</p>
+        <p>Four of a Kind</p>
+        <p>Full House</p>
+        <p>Flush</p>
+        <p>Straight</p>
+        <p>Three of a Kind</p>
+        <p>Two Pair</p>
+        <p>Jacks or Better</p>
+      </div>
+      <div id="payouts">
+        <p>4000</p>
+        <p>250</p>
+        <p>125</p>
+        <p>45</p>
+        <p>30</p>
+        <p>20</p>
+        <p>15</p>
+        <p>10</p>
+        <p>5</p>
+      </div>
     </section>
-    <section id="hold-container">
-      <button class="hold" id="hold1"><span>HOLD</span></button>
-      <button class="hold" id="hold2"><span>HOLD</span></button>
-      <button class="hold" id="hold3"><span>HOLD</span></button>
-      <button class="hold" id="hold4"><span>HOLD</span></button>
-      <button class="hold" id="hold5"><span>HOLD</span></button>
+    <section id="boardhold">
+      <section id="board">
+        <div class="card placeholder" id="card1"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
+        <div class="card placeholder" id="card2"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
+        <div class="card placeholder" id="card3"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
+        <div class="card placeholder" id="card4"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
+        <div class="card placeholder" id="card5"><!-- <span class="ranksuit">K</br>&#9829</span><div class="innercard"></div> --></div>
+      </section>
+      <section id="hold-container">
+        <button class="hold" id="hold1"><span>HOLD</span></button>
+        <button class="hold" id="hold2"><span>HOLD</span></button>
+        <button class="hold" id="hold3"><span>HOLD</span></button>
+        <button class="hold" id="hold4"><span>HOLD</span></button>
+        <button class="hold" id="hold5"><span>HOLD</span></button>
+      </section>
     </section>
-  </section>
-  <section id="bottombar">
-    <div id="credits">CREDITS <output>80</output></div>
-    <button id="deal">DEAL</button>
-  </section>
+    <section id="bottombar">
+      <div id="credits">CREDITS <output>80</output></div>
+      <button id="betmax">BET MAX</button>
+      <button id="deal">DEAL</button>
+    </section>
   </main>
 </body>
 </html>
