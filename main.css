@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+main {
+  border: 1px solid pink;
+  height: 923px;
+  width: 1300px;
+}
+
+#boardhold {
+  width: 1202px;
+  height: 373px;
+  margin: 0 auto;
+}
+
+#board {
+  display: flex;
+  height: 320px;
+  width: 1200px;
+  border: 1px solid blue;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card {
+  border: 3px solid black;
+  height: 300px;
+  width: 200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 10px;
+  /*background-image: url(https://cdn2.dizkover.com/upload/img/orig/130-148644831293-lebron-james-snapchat-username.jpg);
+  background-size: cover;*/
+}
+
+.placeholder {
+  background-color: seagreen;
+  height: 300px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.innercard{
+  border: 3px solid black;
+  height: 255px;
+  width: 146px;
+  margin: auto 0;
+  border-radius: 10px;
+  /*background-image: url(https://cdn2.dizkover.com/upload/img/orig/130-148644831293-lebron-james-snapchat-username.jpg);
+  background-size: cover;*/
+}
+
+.ranksuit {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 25px;
+  text-align: center;
+  line-height: 26px;
+}
+
+#hold-container{
+  display: flex;
+  height: 50px;
+  width: 1200px;
+  border: 1px solid green;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.hold {
+  font-family: 'Montserrat', sans-serif;
+  width: 130px;
+  height: 40px;
+  background-color: #FFD700;
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px black;
+}
+
+#bottombar {
+  border: 1px solid green;
+  width: 1300px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+#credits {
+  background-color: #FFD700;
+  color: white;
+  font-size: 30px;
+  text-shadow: 2px 2px black;
+  width: 300px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,.5);
+}
+
+#deal {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #FFD700;
+  color: white;
+  font-size: 30px;
+  text-shadow: 2px 2px black;
+  width: 100px;
+  height: 60px;
+}
