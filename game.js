@@ -20,6 +20,8 @@ class Card {
   }
 }
 
+//GLOBAL VARIABLES!!!
+
 //empty deck array to populate with cards
 const deck = [];
 //array of card rank values
@@ -31,10 +33,17 @@ const board = [];
 //variable to store credit bank
 let credits = 80;
 
-//for loop to iterate through the suits then the ranks and finally pushing a new card object into the deck array
-for (let i = 0; i<suits.length; i++){
-  for (let j = 0; j<ranks.length; j++){
-    deck.push(new Card(ranks[j], suits[i]));
+//HELPER FUNCTIONS!!!
+
+//helper function to populate the deck
+function popDeck(){
+  //clear the deck to populate
+  deck.length = 0;
+  //double loop to cnstrust 52 cards from the suit and rank arrays
+  for (let i = 0; i<suits.length; i++){
+    for (let j = 0; j<ranks.length; j++){
+      deck.push(new Card(ranks[j], suits[i]));
+    }
   }
 }
 
@@ -62,6 +71,27 @@ function popBoard (){
   }
 }
 
+//helper function to draw the appropriate cards
+function dealBoard(){
+  //jQuery card selectors
+  let $card1 = $('#card1');
+  let $card2 = $('#card2');
+  let $card3 = $('#card3');
+  let $card4 = $('#card4');
+  let $card5 = $('#card5');
+  let $cards = [$card1, $card2, $card3, $card4, $card5];
+  //for loop to replace cards not held
+  for (let p = 0; p<board.length; p++){
+    if (board[p].held === false){
+      board[p] = deck.pop();
+      $cards[p].css('color', board[p].color);
+      $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
+    }
+  }
+}
+
+//EVENT LISTENERS!!!
+
 $(document).ready(function(){
   console.log('Ready freddy');
 
@@ -71,7 +101,7 @@ $(document).ready(function(){
     //store id of clicked hold button
     let $holdNum = $(this).attr('id');
     //store index of clicked hold to use on board array
-    let index = parseInt($holdNum.charAt(4));
+    let index = parseInt($holdNum.charAt(4) - 1);
     //conditional to toggle the hold from true/false and vice versa
     if (board[index].held === false){
       board[index].held = true;
@@ -85,7 +115,7 @@ $(document).ready(function(){
     //store id of clicked hold button
     let $holdNum = $(this).attr('id');
     //store index of clicked hold to use on board array
-    let index = parseInt($holdNum.charAt(4));
+    let index = parseInt($holdNum.charAt(4) - 1);
     //conditional to toggle the hold from true/false and vice versa
     if (board[index].held === false){
       board[index].held = true;
@@ -99,6 +129,7 @@ $(document).ready(function(){
   $('#betmax').click(function(){
     credits -= 5;
     $('output').html(credits);
+    popDeck();
     shuffle(deck);
     popBoard();
     let $card1 = $('#card1');
@@ -114,5 +145,11 @@ $(document).ready(function(){
     }
     $('#betmax').unbind('click');
   })
+
+  $('#deal').click(function(){
+    dealBoard()
+    $('#deal').unbind('click');
+});
+
 
 });
