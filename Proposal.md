@@ -10,14 +10,14 @@ I chose this game because my mom really likes to play it. I already have a built
 
 ## Wireframe
 
-I have some design ideas but will wait for approval to mock them up.
+![](http://imgur.com/a/6SC2L)
 
 ## Initial thoughts on game structure
 
 I think there are some familiar concepts I can draw from some of the projects we've already done, namely the memory game and high card.
 
 The biggest challenge I expect to face is checking for the various winning winning hands. The typical game has 9 distinct winning outcomes, like one-pair, two-pair, flush, full house, etc. Certain ones are dependent on sequence such as straight and straight flush. There's a lot of different winning combinations so designing the win logic could be tricky. 
-=======
+
 I think there are familiar concepts I can draw from some of the projects we've already done, namely the memory game and high card.
 
 The biggest challenge I expect to face is checking for the various winning hands. The typical game has 9 winning outcomes, like one-pair, two-pair, flush, full house, etc. Certain ones are dependent on sequence such as straight and straight flush. There are quite a few different winning combinations so designing the win logic could be tricky. 
