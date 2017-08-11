@@ -1,10 +1,9 @@
-const board = [2,2,'J', 'Q', 'Q'];
+const board = [4,5,6,7,8];
 
-// function checkWin(b){
-//   //condtional to check for jacks or better
-//   let hasJOB = false;
-//   let hasTwoPair = false
-// }
+
+let hasJOB = false;
+let hasTwoPair = false;
+let hasThreeKind = false;
 
 function jacksOB(b){
     //array of jacks or better to compare index of later
@@ -33,5 +32,64 @@ function jacksOB(b){
     return hasJOB;
   }
 
-console.log(jacksOB(board));
-console.log(board);
+function twoPair(b){
+    //make temporary array in case of mutability
+    let tempBoard = b;
+    //container array for value of pairs
+    const pairs = [];
+    //temporary object to tally number of card values
+    let tally = {};
+    //for loop accumulating number of card values
+    for (let a = 0; a<tempBoard.length; a++){
+      if(!(tempBoard[a] in tally)){
+        tally[tempBoard[a]] = 1;
+      }else{
+        tally[tempBoard[a]] += 1;
+      }
+    }
+    //for-in construct to check tally and collect pairs into array, push into pairs array
+    for (let p in tally){
+      if (tally[p] === 2){
+        pairs.push(p);
+      }
+    }
+    if (pairs.length > 1){
+      hasTwoPair = true;
+    }
+    console.log(pairs);
+    return hasTwoPair;
+  }
+
+function threeKind(b){
+    //make temporary array in case of mutability
+    let tempBoard = b;
+    //container array for value of pairs
+    const three = [];
+    //temporary object to tally number of card values
+    let tally = {};
+    //for loop accumulating number of card values
+    for (let a = 0; a<tempBoard.length; a++){
+      if(!(tempBoard[a] in tally)){
+        tally[tempBoard[a]] = 1;
+      }else{
+        tally[tempBoard[a]] += 1;
+      }
+    }
+    //for-in construct to check tally and collect pairs into array, push into pairs array
+    for (let p in tally){
+      if (tally[p] === 3){
+        hasThreeKind = true;
+        three.push(p);
+      }
+    }
+    console.log(three);
+    return hasThreeKind;
+}
+
+function straight(b){
+  const aceLowArr = ['A',2,3,4,5,6,7,8,9,10,'J', 'Q', 'K'];
+  const aceHighArr = [2,3,4,5,6,7,8,9,10,'J', 'Q', 'K', 'A'];
+
+}
+
+console.log(threeKind(board));
