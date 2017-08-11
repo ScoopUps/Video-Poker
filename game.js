@@ -32,6 +32,8 @@ const suits = ['&#9824', '&#9827', '&#9829', '&#9830'];
 const board = [];
 //variable to store credit bank
 let credits = 80;
+//variable to check within dealer function if bet has been made
+let hasBet = false;
 
 //HELPER FUNCTIONS!!!
 
@@ -65,6 +67,7 @@ function shuffle(deck){
 
 //helper function to populate the main game board
 function popBoard (){
+  board.length = 0;
   while(board.length < 5){
     let tempCard = deck.pop();
     board.push(tempCard);
@@ -90,6 +93,72 @@ function dealBoard(){
   }
 }
 
+//helper function to reopen closed event listeners
+function resetListeners(){
+  $('#betmax').on('click', bettor);
+  $('#deal').on('click', dealer);
+}
+
+//helper function to handle held cards
+function holder() {
+    //store id of clicked hold button
+    let $holdNum = $(this).attr('id');
+    //store index of clicked hold to use on board array
+    let index = parseInt($holdNum.charAt(4) - 1);
+    //conditional to toggle the hold from true/false and vice versa
+    if (board[index].held === false){
+      board[index].held = true;
+    }else if(board[index].held === true){
+      board[index].held = false;
+    }
+    alert(board[index].held);
+}
+
+//helper function to attach to deal button
+function dealer(){
+  //check to see if board has been populated and a bet has been placed
+  if (board.length === 0 || hasBet === false){
+    return;
+  }
+  //deal where appropriate on the board
+  dealBoard();
+  //remove click event
+  $('#deal').off('click');
+  //reset bet to false
+  hasBet = false;
+}
+
+//helper function to attach to bet button
+function bettor(){
+  //set bet to true
+  hasBet = true;
+  //repopulate the deck
+  popDeck();
+  //deduct bet from credit bank
+  credits -= 5;
+  //output new credit total
+  $('output').html(credits);
+  //shuffle deck
+  shuffle(deck);
+  //populate the board
+  popBoard();
+  //select all the card elements
+  let $card1 = $('#card1');
+  let $card2 = $('#card2');
+  let $card3 = $('#card3');
+  let $card4 = $('#card4');
+  let $card5 = $('#card5');
+  //put card elements into array
+  let $cards = [$card1, $card2, $card3, $card4, $card5];
+  //for loop to render cards
+  for(let p = 0; p<board.length; p++){
+    $cards[p].removeClass('placeholder');
+    $cards[p].css('color', board[p].color);
+    $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
+  }
+  $('#betmax').off('click');
+}
+
 //EVENT LISTENERS!!!
 
 $(document).ready(function(){
@@ -97,59 +166,15 @@ $(document).ready(function(){
 
 
   //click event for the hold buttons
-  $('.hold').click(function(){
-    //store id of clicked hold button
-    let $holdNum = $(this).attr('id');
-    //store index of clicked hold to use on board array
-    let index = parseInt($holdNum.charAt(4) - 1);
-    //conditional to toggle the hold from true/false and vice versa
-    if (board[index].held === false){
-      board[index].held = true;
-    }else if(board[index].held === true){
-      board[index].held = false;
-    }
-    alert(board[index].held);
-  })
+  $('.hold').on('click', holder);
 
-   $('.card').click(function(){
-    //store id of clicked hold button
-    let $holdNum = $(this).attr('id');
-    //store index of clicked hold to use on board array
-    let index = parseInt($holdNum.charAt(4) - 1);
-    //conditional to toggle the hold from true/false and vice versa
-    if (board[index].held === false){
-      board[index].held = true;
-    }else if(board[index].held === true){
-      board[index].held = false;
-    }
-    alert(board[index].held);
-   }
- )
+  //click event to hold when clicking the cards themselves
+  $('.card').on('click', holder);
 
-  $('#betmax').click(function(){
-    credits -= 5;
-    $('output').html(credits);
-    popDeck();
-    shuffle(deck);
-    popBoard();
-    let $card1 = $('#card1');
-    let $card2 = $('#card2');
-    let $card3 = $('#card3');
-    let $card4 = $('#card4');
-    let $card5 = $('#card5');
-    let $cards = [$card1, $card2, $card3, $card4, $card5];
-    for(let p = 0; p<board.length; p++){
-      $cards[p].removeClass('placeholder');
-      $cards[p].css('color', board[p].color);
-      $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
-    }
-    $('#betmax').unbind('click');
-  })
+  //click event to initialize board and take bet
+  $('#betmax').on('click', bettor);
 
-  $('#deal').click(function(){
-    dealBoard()
-    $('#deal').unbind('click');
-});
-
+  //click event to
+  $('#deal').on('click', dealer);
 
 });
