@@ -105,13 +105,22 @@ function holder() {
     let $holdNum = $(this).attr('id');
     //store index of clicked hold to use on board array
     let index = parseInt($holdNum.charAt(4) - 1);
-    //conditional to toggle the hold from true/false and vice versa
-    if (board[index].held === false){
-      board[index].held = true;
-    }else if(board[index].held === true){
-      board[index].held = false;
-    }
-    alert(board[index].held);
+    //select hold alert span elements
+    let $ha1 = $('#ha1');
+    let $ha2 = $('#ha2');
+    let $ha3 = $('#ha3');
+    let $ha4 = $('#ha4');
+    let $ha5 = $('#ha5');
+    //put hold alert elements into array
+    let $has = [$ha1, $ha2, $ha3, $ha4, $ha5];
+      //conditional to toggle the hold true/false and the hold alert on/off
+      if (board[index].held === false){
+        $has[index].html('HELD');
+        board[index].held = true;
+      }else if(board[index].held === true){
+        $has[index].empty();
+        board[index].held = false;
+      }
 }
 
 //helper function to attach to deal button
@@ -159,11 +168,11 @@ function bettor(){
   $('#betmax').off('click');
 }
 
+
 //EVENT LISTENERS!!!
 
 $(document).ready(function(){
   console.log('Ready freddy');
-
 
   //click event for the hold buttons
   $('.hold').on('click', holder);

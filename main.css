@@ -52,13 +52,27 @@ main {
 
 #boardhold {
   width: 1202px;
-  height: 373px;
+  height: 388px;
   margin: 0 auto;
+}
+
+#holdalert{
+  width: 1202px;
+  height: 25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#holdalert span{
+  font-size: 20px;
+  width: 55px;
+  color: black;
 }
 
 #board {
   display: flex;
-  height: 320px;
+  height: 310px;
   width: 1200px;
   border: 1px solid blue;
   justify-content: space-around;
@@ -103,7 +117,7 @@ main {
 
 #hold-container{
   display: flex;
-  height: 50px;
+  height: 45px;
   width: 1200px;
   border: 1px solid green;
   justify-content: space-around;
@@ -123,7 +137,7 @@ main {
 #bottombar {
   border: 1px solid green;
   width: 1300px;
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -135,9 +149,9 @@ main {
   font-size: 30px;
   text-shadow: 2px 2px black;
   width: 250px;
-  height: 50px;
+  height: 45px;
   text-align: center;
-  line-height: 50px;
+  line-height: 45px;
   box-shadow: 1px 1px 1px 1px rgba(0,0,0,.5);
 }
 
@@ -148,7 +162,7 @@ main {
   font-size: 30px;
   text-shadow: 2px 2px black;
   width: 200px;
-  height: 53px;
+  height: 48px;
 }
 
 #deal {
@@ -158,5 +172,5 @@ main {
   font-size: 30px;
   text-shadow: 2px 2px black;
   width: 200px;
-  height: 53px;
+  height: 48px;
 }
