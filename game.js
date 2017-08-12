@@ -1,4 +1,4 @@
-console.log('Game.js is ready')
+// console.log('Game.js is ready')
 
 
 //create card class
@@ -35,7 +35,7 @@ let credits = 80;
 //variable to check within dealer function if bet has been made
 let hasBet = false;
 
-//HELPER FUNCTIONS!!!
+//HELPER FUNCTIONS FOR GENERAL GAME!!!
 
 //helper function to populate the deck
 function popDeck(){
@@ -86,8 +86,11 @@ function dealBoard(){
   //for loop to replace cards not held
   for (let p = 0; p<board.length; p++){
     if (board[p].held === false){
+      //pop a value off the deck and insert into unheld card position
       board[p] = deck.pop();
+      //add red styling for hearts/diamonds
       $cards[p].css('color', board[p].color);
+      //add visual card representation into unheld card position
       $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
     }
   }
@@ -95,8 +98,12 @@ function dealBoard(){
 
 //helper function to reopen closed event listeners
 function resetListeners(){
+  //reset bet max button listener
   $('#betmax').on('click', bettor);
+  //reset deal button listener
   $('#deal').on('click', dealer);
+  //clear held alerts from bar
+  $('#holdalert').children().empty();
 }
 
 //helper function to handle held cards
@@ -133,6 +140,8 @@ function dealer(){
   dealBoard();
   //remove click event
   $('#deal').off('click');
+  //check for final win and reattach event listeners
+  checkWin2(board);
   //reset bet to false
   hasBet = false;
 }
@@ -151,6 +160,7 @@ function bettor(){
   shuffle(deck);
   //populate the board
   popBoard();
+  let tempBoard = board;
   //select all the card elements
   let $card1 = $('#card1');
   let $card2 = $('#card2');
@@ -165,14 +175,201 @@ function bettor(){
     $cards[p].css('color', board[p].color);
     $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
   }
+  checkWin1(tempBoard);
   $('#betmax').off('click');
+}
+
+//HELPER FUNCTIONS FOR WIN CONDITIONS!!!
+
+//function to check board for pair of jacks or better
+function jacksOB(b){
+    //boolean check for pair of jacks or better
+    let hasJOB = false;
+    //array of jacks or better to compare index of later
+    const jobArr = ['J', 'Q', 'K', 'A',];
+    //make temporary array in case of mutability
+    let tempBoard = b;
+    //container array for value of pairs
+    const pairs = [];
+    //temporary object to tally number of card values
+    let tally = {};
+    //for loop accumulating number of card values
+    for (let a = 0; a<tempBoard.length; a++){
+      if(!(tempBoard[a].rank in tally)){
+        tally[tempBoard[a].rank] = 1;
+      }else{
+        tally[tempBoard[a].rank] += 1;
+      }
+    }
+    //for-in construct to check tally for pair of jacks or better, push into pairs array and return true if so
+    for (let p in tally){
+      if (tally[p] === 2 && jobArr.indexOf(p) !== -1){
+        hasJOB = true;
+        pairs.push(p);
+      }
+    }
+    return hasJOB;
+}
+
+//function to check board for two pair
+function twoPair(b){
+    //boolean check for two pairs
+    let hasTwoPair = false;
+    //make temporary array in case of mutability
+    let tempBoard = b;
+    //container array for value of pairs
+    const pairs = [];
+    //temporary object to tally number of card values
+    let tally = {};
+    //for loop accumulating number of card values
+    for (let a = 0; a<tempBoard.length; a++){
+      if(!(tempBoard[a].rank in tally)){
+        tally[tempBoard[a].rank] = 1;
+      }else{
+        tally[tempBoard[a].rank] += 1;
+      }
+    }
+    //for-in construct to check tally and collect pairs into array, push into pairs array
+    for (let p in tally){
+      if (tally[p] === 2){
+        pairs.push(p);
+      }
+    }
+    if (pairs.length > 1){
+      hasTwoPair = true;
+    }
+    return hasTwoPair;
+  }
+
+//function to check board for three of a kind
+function threeKind(b){
+    //boolean check for three of a kind
+    let hasThreeKind = false;
+    //make temporary array in case of mutability
+    let tempBoard = b;
+    //container array for value of pairs
+    const three = [];
+    //temporary object to tally number of card values
+    let tally = {};
+    //for loop accumulating number of card values
+    for (let a = 0; a<tempBoard.length; a++){
+      if(!(tempBoard[a].rank in tally)){
+        tally[tempBoard[a].rank] = 1;
+      }else{
+        tally[tempBoard[a].rank] += 1;
+      }
+    }
+    //for-in construct to check tally and collect pairs into array, push into pairs array
+    for (let p in tally){
+      if (tally[p] === 3){
+        hasThreeKind = true;
+        three.push(p);
+      }
+    }
+    return hasThreeKind;
+  }
+
+//function to check board for straight
+function straight(b){
+  //boolean check for straight
+  let hasStraight = false;
+  //fork two functions to check for low-ace straight and high-ace straight cases
+  function lowStraight(bl){
+    //comparison array to check for straights with the low ace
+    const aceLowArr = ['A',2,3,4,5,6,7,8,9,10,'J', 'Q', 'K'];
+    //helper function to compare two elements along the low ace spectrum
+    function sortLow(c,d){
+      const aceLow = ['A',2,3,4,5,6,7,8,9,10,'J', 'Q', 'K'];
+      return aceLow.indexOf(c.rank) - aceLow.indexOf(d.rank);
+    }
+    //make a copy of sorted array without mutating original by adding slice method
+    let tempBoardL = b.slice(0).sort(sortLow);
+    console.log(tempBoardL);
+    //variable to use as initial index for low ace array
+    let low = aceLowArr.indexOf(tempBoardL[0].rank);
+    //array to contain true/false values for low ace case
+    const lowAceTrueArr = [];
+    //for loop to compare low sorted board array against low ace array
+    for (let ind = 0; ind<tempBoardL.length; ind++){
+      lowAceTrueArr.push(tempBoardL[ind].rank === aceLowArr[low]);
+      low += 1;
+    }
+    console.log(lowAceTrueArr);
+    if(lowAceTrueArr.indexOf(false) === -1){
+      hasStraight = true;
+    }
+  }
+  function highStraight(bh){
+    //comparison array to check for straights with the high ace
+    const aceHighArr = [2,3,4,5,6,7,8,9,10,'J', 'Q', 'K', 'A'];
+    //helper function to compare two elements along the high ace spectrum
+    function sortHigh(c,d){
+      const aceHigh = [2,3,4,5,6,7,8,9,10,'J', 'Q', 'K', 'A'];
+      return aceHigh.indexOf(c.rank) - aceHigh.indexOf(d.rank);
+    }
+    //make a copy of sorted array without mutating original by adding slice method
+    let tempBoardH = bh.slice(0).sort(sortHigh);
+    console.log(tempBoardH);
+    //variable to use as initial index for high ace array
+    let high = aceHighArr.indexOf(tempBoardH[0].rank);
+    //array to contain true/false values for high ace case
+    const highAceTrueArr = [];
+    //for loop to compare high sorted board array against high ace array
+    for (let j = 0; j<tempBoardH.length; j++){
+      highAceTrueArr.push(tempBoardH[j].rank === aceHighArr[high]);
+      high += 1;
+    }
+    console.log(highAceTrueArr);
+    //condtional to check if either low ace or high ace cases result in straight hand
+    if (highAceTrueArr.indexOf(false) === -1){
+      hasStraight = true;
+    }
+  }
+  lowStraight(b);
+  highStraight(b);
+  return hasStraight;
+}
+
+function checkWin1(hand){
+  //boolean check for flush
+  let hasFlush = false;
+  //boolean check for full house
+  let hasFullHouse = false;
+  //boolean check for four of a kind
+  let hasFourKind = false;
+  //boolean check for straight flush
+  let hasStraightFlush = false;
+  //boolean check for royal flush
+  let hasRoyalFlush = false;
+  console.log('jacks or better: ' + jacksOB(hand));
+  console.log('two pair: ' + twoPair(hand));
+  console.log('three of a kind: ' + threeKind(hand));
+  console.log('straight: ' + straight(hand));
+}
+
+function checkWin2(hand){
+  //boolean check for flush
+  let hasFlush = false;
+  //boolean check for full house
+  let hasFullHouse = false;
+  //boolean check for four of a kind
+  let hasFourKind = false;
+  //boolean check for straight flush
+  let hasStraightFlush = false;
+  //boolean check for royal flush
+  let hasRoyalFlush = false;
+  console.log('jacks or better: ' + jacksOB(hand));
+  console.log('two pair: ' + twoPair(hand));
+  console.log('three of a kind: ' + threeKind(hand));
+  console.log('straight: ' + straight(hand));
+  resetListeners();
 }
 
 
 //EVENT LISTENERS!!!
 
 $(document).ready(function(){
-  console.log('Ready freddy');
+  // console.log('Ready freddy');
 
   //click event for the hold buttons
   $('.hold').on('click', holder);

@@ -1,5 +1,5 @@
-const board = [4,5,6,7,8];
-
+const board = [4,5,'J','J',8];
+const suits = ['&#9829', '&#9829', '&#9829', '&#9829', '&#9827'];
 
 let hasJOB = false;
 let hasTwoPair = false;
@@ -86,10 +86,4 @@ function threeKind(b){
     return hasThreeKind;
 }
 
-function straight(b){
-  const aceLowArr = ['A',2,3,4,5,6,7,8,9,10,'J', 'Q', 'K'];
-  const aceHighArr = [2,3,4,5,6,7,8,9,10,'J', 'Q', 'K', 'A'];
-
-}
-
-console.log(threeKind(board));
+console.log
