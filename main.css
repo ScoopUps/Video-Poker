@@ -11,10 +11,11 @@ main {
 }
 
 #header {
-  border: 1px solid purple;
   height: 200px;
-  width: 1300px;
+  width: 1298px;
   display: flex;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 #winninghands {
@@ -55,13 +56,15 @@ main {
   width: 650px;
   background-color: mediumblue;
   color: white;
-  font-size: 20px;
+  font-size: 25px;
   text-shadow: 2px 2px black;
   text-align: center;
 }
 
-#message{
-  line-height: 1px;
+#message {
+  top: 80px;
+  position: relative;
+  line-height: 2px;
 }
 
 #boardhold {
@@ -101,8 +104,6 @@ main {
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 10px;
-  /*background-image: url(https://cdn2.dizkover.com/upload/img/orig/130-148644831293-lebron-james-snapchat-username.jpg);
-  background-size: cover;*/
 }
 
 .placeholder {
@@ -115,8 +116,9 @@ main {
 .innercard{
   border: 3px solid black;
   height: 255px;
-  width: 146px;
-  margin: auto 0;
+  width: 140px;
+  margin-top: 20px;
+  margin-left: 3px;
   border-radius: 10px;
   /*background-image: url(https://cdn2.dizkover.com/upload/img/orig/130-148644831293-lebron-james-snapchat-username.jpg);
   background-size: cover;*/
@@ -124,18 +126,22 @@ main {
 
 .ranksuit {
   font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
+  font-size: 24px;
   text-align: center;
   line-height: 26px;
+  width: 25px;
+  margin-left: 1px;
 }
 
 #hold-container{
   display: flex;
   height: 45px;
-  width: 1200px;
-  border: 1px solid green;
+  width: 1198px;
   justify-content: space-around;
   align-items: center;
+  background-color: #757575;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .hold {
@@ -149,12 +155,14 @@ main {
 }
 
 #bottombar {
-  border: 1px solid green;
-  width: 1300px;
+  width: 1298px;
   height: 60px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: #757575;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 #credits {
