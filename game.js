@@ -102,12 +102,17 @@ function resetListeners(){
   $('#betmax').on('click', bettor);
   //reset deal button listener
   $('#deal').on('click', dealer);
+  //rest hold buttons listener
+  $('.hold').on('click', holder);
   //clear held alerts from bar
   $('#holdalert').children().empty();
 }
 
 //helper function to handle held cards
 function holder() {
+    if (board.length === 0 || hasBet === false){
+    return;
+    }
     //store id of clicked hold button
     let $holdNum = $(this).attr('id');
     //store index of clicked hold to use on board array
@@ -138,8 +143,9 @@ function dealer(){
   }
   //deal where appropriate on the board
   dealBoard();
-  //remove click event
+  //remove deal and hold click events
   $('#deal').off('click');
+  $('.hold').off('click');
   //check for final win and reattach event listeners
   checkWin2(board);
   //reset bet to false
@@ -155,7 +161,7 @@ function bettor(){
   //deduct bet from credit bank
   credits -= 5;
   //output new credit total
-  $('output').html(credits);
+  $('#creditcount').html(credits);
   //shuffle deck
   shuffle(deck);
   //populate the board
@@ -404,7 +410,7 @@ function fourKind(b){
     return hasFourKind;
   }
 
-//function to check board for a straight flush
+//function to check board for straight flush
 function straightFlush(b){
   //boolean check for straight flush
   let hasStraightFlush = false;
@@ -415,30 +421,68 @@ function straightFlush(b){
   return hasStraightFlush;
 }
 
-function checkWin1(hand){
+//function to check board for royal flush
+function royalFlush(b){
   //boolean check for royal flush
   let hasRoyalFlush = false;
-  console.log('jacks or better: ' + jacksOB(hand));
-  console.log('two pair: ' + twoPair(hand));
-  console.log('three of a kind: ' + threeKind(hand));
-  console.log('straight: ' + straight(hand));
-  console.log('flush: ' + flush(hand));
-  console.log('full house: ' + fullHouse(hand));
-  console.log('four of a kind: ' + fourKind(hand));
-  console.log('straight flush: ' + straightFlush(hand));
+  function royalStraight(br){
+    let hasRoyalStraight = false;
+    //comparison array to check for royal straight
+    const royalArr = [10,'J', 'Q', 'K', 'A'];
+    //helper function to compare two elements along royal spectrum
+    function sortRoyal(c,d){
+      const royal = [10,'J', 'Q', 'K', 'A'];
+      return royal.indexOf(c.rank) - royal.indexOf(d.rank);
+    }
+    //make a copy of sorted array without mutating original by adding slice method
+    let tempBoardR = br.slice(0).sort(sortRoyal);
+    //variable to use as initial index for royal straight array
+    let royalIndex = royalArr.indexOf(tempBoardR[0].rank);
+    //array to contain true/false values for royal straight case
+    const royalTrueArr = [];
+    //for loop to compare sorted board array against royal straight array
+    for (let j = 0; j<tempBoardR.length; j++){
+      royalTrueArr.push(tempBoardR[j].rank === royalArr[royalIndex]);
+      royalIndex += 1;
+    }
+    //condtional to check royal boolean container array for true/false values
+    if (royalTrueArr.indexOf(false) === -1){
+      hasRoyalStraight = true;
+    }
+    return hasRoyalStraight;
+  }
+  //conditional check to see if board has both royal straight and flush properties
+  if (royalStraight(b) && flush(b)){
+    hasRoyalFlush = true;
+  }
+  return hasRoyalFlush;
+}
+
+function checkWin1(hand){
+  let $message = $('#message');
+  $message.html('jacks or better: ' + jacksOB(hand) + '</br>' +
+                'two pair: ' + twoPair(hand) + '</br>' +
+                'three of a kind: ' + threeKind(hand) + '</br>' +
+                'straight: ' + straight(hand) + '</br>' +
+                'flush: ' + flush(hand) + '</br>' +
+                'full house: ' + fullHouse(hand) + '</br>' +
+                'four of a kind: ' + fourKind(hand) + '</br>' +
+                'straight flush: ' + straightFlush(hand) + '</br>' +
+                'royal flush: ' + royalFlush(hand));
 }
 
 function checkWin2(hand){
-  //boolean check for royal flush
-  let hasRoyalFlush = false;
-  console.log('jacks or better: ' + jacksOB(hand));
-  console.log('two pair: ' + twoPair(hand));
-  console.log('three of a kind: ' + threeKind(hand));
-  console.log('straight: ' + straight(hand));
-  console.log('flush: ' + flush(hand));
-  console.log('full house: ' + fullHouse(hand));
-  console.log('four of a kind: ' + fourKind(hand));
-  console.log('straight flush: ' + straightFlush(hand));
+  let $message = $('#message');
+  $message.empty();
+  $message.html('jacks or better: ' + jacksOB(hand) + '</br>' +
+                'two pair: ' + twoPair(hand) + '</br>' +
+                'three of a kind: ' + threeKind(hand) + '</br>' +
+                'straight: ' + straight(hand) + '</br>' +
+                'flush: ' + flush(hand) + '</br>' +
+                'full house: ' + fullHouse(hand) + '</br>' +
+                'four of a kind: ' + fourKind(hand) + '</br>' +
+                'straight flush: ' + straightFlush(hand) + '</br>' +
+                'royal flush: ' + royalFlush(hand));
   resetListeners();
 }
 

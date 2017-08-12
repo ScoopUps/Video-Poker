@@ -50,10 +50,24 @@ main {
   line-height: 1px;
 }
 
+#playeroutput {
+  height: 200px;
+  width: 650px;
+  background-color: mediumblue;
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px black;
+  text-align: center;
+}
+
+#message{
+  line-height: 1px;
+}
+
 #boardhold {
   width: 1202px;
   height: 388px;
-  margin: 0 auto;
+  margin: 1px auto;
 }
 
 #holdalert{
