@@ -187,18 +187,16 @@ function jacksOB(b){
     let hasJOB = false;
     //array of jacks or better to compare index of later
     const jobArr = ['J', 'Q', 'K', 'A',];
-    //make temporary array in case of mutability
-    let tempBoard = b;
     //container array for value of pairs
     const pairs = [];
     //temporary object to tally number of card values
     let tally = {};
     //for loop accumulating number of card values
-    for (let a = 0; a<tempBoard.length; a++){
-      if(!(tempBoard[a].rank in tally)){
-        tally[tempBoard[a].rank] = 1;
+    for (let a = 0; a<b.length; a++){
+      if(!(b[a].rank in tally)){
+        tally[b[a].rank] = 1;
       }else{
-        tally[tempBoard[a].rank] += 1;
+        tally[b[a].rank] += 1;
       }
     }
     //for-in construct to check tally for pair of jacks or better, push into pairs array and return true if so
@@ -215,18 +213,16 @@ function jacksOB(b){
 function twoPair(b){
     //boolean check for two pairs
     let hasTwoPair = false;
-    //make temporary array in case of mutability
-    let tempBoard = b;
     //container array for value of pairs
     const pairs = [];
     //temporary object to tally number of card values
     let tally = {};
     //for loop accumulating number of card values
-    for (let a = 0; a<tempBoard.length; a++){
-      if(!(tempBoard[a].rank in tally)){
-        tally[tempBoard[a].rank] = 1;
+    for (let a = 0; a<b.length; a++){
+      if(!(b[a].rank in tally)){
+        tally[b[a].rank] = 1;
       }else{
-        tally[tempBoard[a].rank] += 1;
+        tally[b[a].rank] += 1;
       }
     }
     //for-in construct to check tally and collect pairs into array, push into pairs array
@@ -245,18 +241,16 @@ function twoPair(b){
 function threeKind(b){
     //boolean check for three of a kind
     let hasThreeKind = false;
-    //make temporary array in case of mutability
-    let tempBoard = b;
     //container array for value of pairs
     const three = [];
     //temporary object to tally number of card values
     let tally = {};
     //for loop accumulating number of card values
-    for (let a = 0; a<tempBoard.length; a++){
-      if(!(tempBoard[a].rank in tally)){
-        tally[tempBoard[a].rank] = 1;
+    for (let a = 0; a<b.length; a++){
+      if(!(b[a].rank in tally)){
+        tally[b[a].rank] = 1;
       }else{
-        tally[tempBoard[a].rank] += 1;
+        tally[b[a].rank] += 1;
       }
     }
     //for-in construct to check tally and collect pairs into array, push into pairs array
@@ -284,7 +278,6 @@ function straight(b){
     }
     //make a copy of sorted array without mutating original by adding slice method
     let tempBoardL = b.slice(0).sort(sortLow);
-    console.log(tempBoardL);
     //variable to use as initial index for low ace array
     let low = aceLowArr.indexOf(tempBoardL[0].rank);
     //array to contain true/false values for low ace case
@@ -294,7 +287,6 @@ function straight(b){
       lowAceTrueArr.push(tempBoardL[ind].rank === aceLowArr[low]);
       low += 1;
     }
-    console.log(lowAceTrueArr);
     if(lowAceTrueArr.indexOf(false) === -1){
       hasStraight = true;
     }
@@ -309,7 +301,6 @@ function straight(b){
     }
     //make a copy of sorted array without mutating original by adding slice method
     let tempBoardH = bh.slice(0).sort(sortHigh);
-    console.log(tempBoardH);
     //variable to use as initial index for high ace array
     let high = aceHighArr.indexOf(tempBoardH[0].rank);
     //array to contain true/false values for high ace case
@@ -319,7 +310,6 @@ function straight(b){
       highAceTrueArr.push(tempBoardH[j].rank === aceHighArr[high]);
       high += 1;
     }
-    console.log(highAceTrueArr);
     //condtional to check if either low ace or high ace cases result in straight hand
     if (highAceTrueArr.indexOf(false) === -1){
       hasStraight = true;
@@ -330,38 +320,125 @@ function straight(b){
   return hasStraight;
 }
 
-function checkWin1(hand){
+function flush(b){
   //boolean check for flush
   let hasFlush = false;
-  //boolean check for full house
-  let hasFullHouse = false;
-  //boolean check for four of a kind
-  let hasFourKind = false;
+  const arr = [];
+  //push each suit into temporary container array
+  for (let i = 0; i< b.length; i++){
+    arr.push(b[i].suit);
+  }
+  //predicate functions checking for each of the 4 suits
+  function isSpade(el){
+    return el === '&#9824';
+  }
+  function isClub(el){
+    return el === '&#9827';
+  }
+  function isHeart(el){
+    return el === '&#9829';
+  }
+  function isDiamond(el){
+    return el === '&#9830';
+  }
+  //check elements of container array using every method against each suit
+  if(arr.every(isSpade) || arr.every(isClub) || arr.every(isHeart) || arr.every(isDiamond)){
+    hasFlush = true;
+  }
+  return hasFlush;
+}
+
+function fullHouse(b){
+    //boolean check for full house
+    let hasFullHouse = false;
+    //container array for value of three of a kind and a pair
+    const three = [];
+    const pair = [];
+    //temporary object to tally number of card values
+    let tally = {};
+    //for loop accumulating number of card values
+    for (let a = 0; a<b.length; a++){
+      if(!(b[a].rank in tally)){
+        tally[b[a].rank] = 1;
+      }else{
+        tally[b[a].rank] += 1;
+      }
+    }
+    //for-in construct to check tally and collect pairs into array, push into pairs array
+    for (let p in tally){
+      if (tally[p] === 3){
+        three.push(p);
+      }else if(tally[p] === 2){
+        pair.push(p);
+      }
+    }
+    if (three.length === 1 && pair.length === 1){
+      hasFullHouse = true;
+    }
+    return hasFullHouse;
+}
+
+//function to check board for four of a kind
+function fourKind(b){
+    //boolean check for four of a kind
+    let hasFourKind = false;
+    //container array for value of pairs
+    const four = [];
+    //temporary object to tally number of card values
+    let tally = {};
+    //for loop accumulating number of card values
+    for (let a = 0; a<b.length; a++){
+      if(!(b[a].rank in tally)){
+        tally[b[a].rank] = 1;
+      }else{
+        tally[b[a].rank] += 1;
+      }
+    }
+    //for-in construct to check tally and collect pairs into array, push into pairs array
+    for (let p in tally){
+      if (tally[p] === 4){
+        hasFourKind = true;
+        four.push(p);
+      }
+    }
+    return hasFourKind;
+  }
+
+//function to check board for a straight flush
+function straightFlush(b){
   //boolean check for straight flush
   let hasStraightFlush = false;
+  //check if the board is both flush and straight using existing predicate functions
+  if (flush(b) && straight(b)){
+    hasStraightFlush = true;
+  }
+  return hasStraightFlush;
+}
+
+function checkWin1(hand){
   //boolean check for royal flush
   let hasRoyalFlush = false;
   console.log('jacks or better: ' + jacksOB(hand));
   console.log('two pair: ' + twoPair(hand));
   console.log('three of a kind: ' + threeKind(hand));
   console.log('straight: ' + straight(hand));
+  console.log('flush: ' + flush(hand));
+  console.log('full house: ' + fullHouse(hand));
+  console.log('four of a kind: ' + fourKind(hand));
+  console.log('straight flush: ' + straightFlush(hand));
 }
 
 function checkWin2(hand){
-  //boolean check for flush
-  let hasFlush = false;
-  //boolean check for full house
-  let hasFullHouse = false;
-  //boolean check for four of a kind
-  let hasFourKind = false;
-  //boolean check for straight flush
-  let hasStraightFlush = false;
   //boolean check for royal flush
   let hasRoyalFlush = false;
   console.log('jacks or better: ' + jacksOB(hand));
   console.log('two pair: ' + twoPair(hand));
   console.log('three of a kind: ' + threeKind(hand));
   console.log('straight: ' + straight(hand));
+  console.log('flush: ' + flush(hand));
+  console.log('full house: ' + fullHouse(hand));
+  console.log('four of a kind: ' + fourKind(hand));
+  console.log('straight flush: ' + straightFlush(hand));
   resetListeners();
 }
 
