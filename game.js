@@ -1,4 +1,4 @@
-// console.log('Game.js is ready')
+console.log('Game.js is ready')
 
 
 //create card class
@@ -11,9 +11,86 @@ class Card {
     this.suit = suit;
     //set initial color to black
     this.color = 'black';
+    this.styleClass = "url('gamepics/aemiro.jpeg')";
     //if suit is a heart or diamond, set the color to red
     if (this.suit === '&#9829' || this.suit === '&#9830'){
       this.color = 'red';
+    }
+    //matching pics to card classes
+
+//-------------------red cards------------------
+
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 2){
+      this.styleClass = "redtwo";
+    }
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 3){
+      this.styleClass = "redthree";
+    }
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 4){
+      this.styleClass = "redfour";
+    }
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 5){
+      this.styleClass = "redfive";
+    }
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 6){
+      this.styleClass = "redsix";
+    }
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 7){
+      this.styleClass = "redseven";
+    }
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 8){
+      this.styleClass = "redeight";
+    }
+    if ((this.suit === '&#9829' || this.suit === '&#9830') && this.rank === 9){
+      this.styleClass = "rednine";
+    }
+
+//---------------black cards----------------
+
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 2){
+      this.styleClass = "blacktwo";
+    }
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 3){
+      this.styleClass = "blackthree";
+    }
+    //amzad-angel pic for 3 card
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 4){
+      this.styleClass = "blackfour";
+    }
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 5){
+      this.styleClass = "blackfive";
+    }
+    //crhis-darren pic for 4 card
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 6){
+      this.styleClass = "blacksix";
+    }
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 7){
+      this.styleClass = "blackseven";
+    }
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 8){
+      this.styleClass = "blackeight";
+    }
+    //crhis-darren pic for 4 card
+    if ((this.suit === '&#9824' || this.suit === '&#9827') && this.rank === 9){
+      this.styleClass = "blacknine";
+    }
+
+//--------------high cards-----------------
+
+    if (this.rank === 10){
+      this.styleClass = "ten";
+    }
+    if (this.rank === 'J'){
+      this.styleClass = "jack";
+    }
+    if (this.rank === 'Q'){
+      this.styleClass = "queen";
+    }
+    if (this.rank === 'K'){
+      this.styleClass = "king";
+    }
+    if (this.rank === 'A'){
+      this.styleClass = "ace";
     }
     //hold condition to check for when thrust onto game board
     this.held = false;
@@ -31,7 +108,7 @@ const suits = ['&#9824', '&#9827', '&#9829', '&#9830'];
 //array to be the main representation of the game's 5-card draw board
 const board = [];
 //variable to store credit bank
-let credits = 10;
+let credits = 80;
 //variable to check within dealer function if bet has been made
 let hasBet = false;
 
@@ -51,8 +128,8 @@ function popDeck(){
 
 //helper function to shuffle the deck array
 function shuffle(deck){
-  //random num of shuffles up to 52 to scatter the deck
-  let numOfShuffles = Math.floor(Math.random()* 1000);
+  //randomize number of times to shuffle; scattering the deck
+  let numOfShuffles = Math.floor(Math.random()* 1980);
   for (let n = 0; n<numOfShuffles; n++){
     //sort the deck using a randomizer by the num of shuffles variable
     deck.sort(function(a,b){
@@ -67,7 +144,9 @@ function shuffle(deck){
 
 //helper function to populate the main game board
 function popBoard (){
+  //clear board by assigning length to 0
   board.length = 0;
+  //while board length is less than 5, pop a value off the deck and push to board
   while(board.length < 5){
     let tempCard = deck.pop();
     board.push(tempCard);
@@ -91,15 +170,17 @@ function dealBoard(){
       //add red styling for hearts/diamonds
       $cards[p].css('color', board[p].color);
       //add visual card representation into unheld card position
-      $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
+      $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
+      $cards[p].children('.innercard').css('border-color', board[p].color);
+      $cards[p].children('.innercard').toggleClass(board[p].styleClass);
     }
   }
 }
 
 //helper function to reopen closed event listeners
 function resetListeners(){
-  //reset bet max button listener
-  $('#betmax').on('click', bettor);
+  //reset bet button listener
+  $('#bet').on('click', bettor);
   //reset deal button listener
   $('#deal').on('click', dealer);
   //rest hold buttons listener
@@ -110,8 +191,8 @@ function resetListeners(){
 
 //helper function to kill all the event listeners
 function killListeners(){
-  //remove bet max button listener
-  $('#betmax').off('click');
+  //remove bet button listener
+  $('#bet').off('click');
   //remove deal button listener
   $('#deal').off('click');
   //remove hold buttons listener
@@ -166,6 +247,7 @@ function dealer(){
 
 //helper function to attach to bet button
 function bettor(){
+  //GAME STATE conditional to remove listeners and end game
   if (credits <= 0){
     killListeners();
     let $finalMessage = $('#message');
@@ -179,6 +261,8 @@ function bettor(){
   popDeck();
   //deduct bet from credit bank
   credits -= 5;
+  //coin insert sound effect
+  document.querySelector('#coindrop').play();
   //output new credit total
   $('#creditcount').html(credits);
   //shuffle deck
@@ -198,10 +282,12 @@ function bettor(){
   for(let p = 0; p<board.length; p++){
     $cards[p].removeClass('placeholder');
     $cards[p].css('color', board[p].color);
-    $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div>');
+    $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
+    $cards[p].children('.innercard').css('border-color', board[p].color);
+    $cards[p].children('.innercard').toggleClass(board[p].styleClass);
   }
   checkWin1(tempBoard);
-  $('#betmax').off('click');
+  $('#bet').off('click');
 }
 
 //HELPER FUNCTIONS FOR WIN CONDITIONS!!!
@@ -481,39 +567,48 @@ function checkWin1(hand){
   let $message = $('#message');
   $message.empty();
   if (royalFlush(hand)){
-    $message.html(`You were dealt a Royal Flush!!!`);
+    $message.html(`Hold up. You were dealt a Royal Flush!!!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (straightFlush(hand)){
-    $message.html(`You were dealt a Straight Flush!`);
+    $message.html(`Hold up. You were dealt a Straight Flush!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (fourKind(hand)){
-    $message.html(`You were dealt Four of a Kind!`);
+    $message.html(`Hold up. You were dealt Four of a Kind!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (fullHouse(hand)){
-    $message.html(`You were dealt a Full House!`);
+    $message.html(`Hold up. You were dealt a Full House!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (flush(hand)){
-    $message.html(`You were dealt a Flush!`);
+    $message.html(`Hold up. You were dealt a Flush!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (straight(hand)){
-    $message.html(`You were dealt a Straight!`);
+    $message.html(`Hold up. You were dealt a Straight!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (threeKind(hand)){
-    $message.html(`You were dealt Three of a Kind!`);
+    $message.html(`Hold up. You were dealt Three of a Kind!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (twoPair(hand)){
-    $message.html(`You were dealt Two Pair!`);
+    $message.html(`Hold up. You were dealt Two Pair!`);
+    document.querySelector('#winalert').play();
     return;
   }
   if (jacksOB(hand)){
-    $message.html(`You were dealt Jacks or Better.`);
+    $message.html(`Hold up. You were dealt Jacks or Better.`);
+    document.querySelector('#winalert').play();
     return;
   }
 }
@@ -526,57 +621,67 @@ function checkWin2(hand){
     credits += 4000;
     $('#creditcount').html(credits);
     $message.html(`You win 4000 credits with a Royal Flush!!!`);
+    document.querySelector('#bigwin').play();
     return;
   }
   if (straightFlush(hand)){
     credits += 250;
     $('#creditcount').html(credits);
     $message.html(`You win 250 credits with a Straight Flush!`);
+    document.querySelector('#bigwin').play();
     return;
   }
   if (fourKind(hand)){
     credits += 125;
     $('#creditcount').html(credits);
     $message.html(`You win 125 credits with Four of a Kind!`);
+    document.querySelector('#bigwin').play();
     return;
   }
   if (fullHouse(hand)){
     credits += 45;
     $('#creditcount').html(credits);
     $message.html(`You win 45 credits with a Full House!`);
+    document.querySelector('#goodwin').play();
     return;
   }
   if (flush(hand)){
     credits += 30;
     $('#creditcount').html(credits);
     $message.html(`You win 30 credits with a Flush!`);
+    document.querySelector('#goodwin').play();
     return;
   }
   if (straight(hand)){
     credits += 20;
     $('#creditcount').html(credits);
     $message.html(`You win 20 credits with a Straight!`);
+    document.querySelector('#goodwin').play();
     return;
   }
   if (threeKind(hand)){
     credits += 15;
     $('#creditcount').html(credits);
     $message.html(`You win 15 credits with Three of a Kind!`);
+    document.querySelector('#decentwin').play();
     return;
   }
   if (twoPair(hand)){
     credits += 10;
     $('#creditcount').html(credits);
     $message.html(`You win 10 credits with Two Pair!`);
+    document.querySelector('#decentwin').play();
     return;
   }
   if (jacksOB(hand)){
     credits += 5;
     $('#creditcount').html(credits);
     $message.html(`You win 5 credits with Jacks or Better.`);
+    document.querySelector('#job').play();
     return;
   }else{
-    $message.html(`No dice. Try again.`);
+    $message.html(`Game over. Try again.`);
+    document.querySelector('#dealout').play();
     return;
   }
 }
@@ -587,7 +692,7 @@ function checkWin2(hand){
 //EVENT LISTENERS!!!
 
 $(document).ready(function(){
-  // console.log('Ready freddy');
+  console.log('Ready freddy');
 
   //click event for the hold buttons
   $('.hold').on('click', holder);
@@ -596,7 +701,7 @@ $(document).ready(function(){
   $('.card').on('click', holder);
 
   //click event to initialize board and take bet
-  $('#betmax').on('click', bettor);
+  $('#bet').on('click', bettor);
 
   //click event to
   $('#deal').on('click', dealer);
@@ -604,3 +709,5 @@ $(document).ready(function(){
 
 });
 
+//CITATIONS
+//“Sound effects obtained from https://www.zapsplat.com”

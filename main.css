@@ -2,12 +2,16 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  background-color: rgba(195, 195, 195, 0.9);
 }
 
 main {
-  border: 1px solid pink;
-  height: 923px;
+  height: 655px;
   width: 1300px;
+  background-color: black;
+  box-shadow: inset 0 0 1em white, 0 0 1em black;
+  padding-left: 5.5px;
+  padding-right: 5.5px;
 }
 
 #header {
@@ -15,7 +19,6 @@ main {
   width: 1298px;
   display: flex;
   border: 2px solid black;
-  border-radius: 10px;
 }
 
 #winninghands {
@@ -25,7 +28,6 @@ main {
   color: white;
   font-size: 20px;
   text-shadow: 2px 2px black;
-  border-right: 3px solid black;
 }
 
 #winninghands p {
@@ -75,25 +77,32 @@ main {
 
 #holdalert{
   width: 1202px;
-  height: 25px;
+  height: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: mediumblue;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 #holdalert span{
-  font-size: 20px;
+  font-size: 17px;
   width: 55px;
-  color: black;
+  text-shadow: 2px 2px black;
+  text-align: center;
+  color: white;
+  margin-top: 5px;
 }
+
 
 #board {
   display: flex;
-  height: 310px;
-  width: 1200px;
-  border: 1px solid blue;
+  height: 320px;
+  width: 1202px;
   justify-content: space-around;
   align-items: center;
+  background-color: mediumblue;
 }
 
 .card {
@@ -104,24 +113,25 @@ main {
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 10px;
+  background-color: white;
 }
 
 .placeholder {
-  background-color: black;
+  background-image: url('gamepics/ga.jpg');
+  background-size: cover;
   height: 300px;
   width: 200px;
   border-radius: 10px;
 }
 
 .innercard{
-  border: 3px solid black;
-  height: 255px;
-  width: 140px;
-  margin-top: 20px;
-  margin-left: 3px;
-  border-radius: 10px;
-  /*background-image: url(https://cdn2.dizkover.com/upload/img/orig/130-148644831293-lebron-james-snapchat-username.jpg);
-  background-size: cover;*/
+  border: 5px solid;
+  height: 226px;
+  width: 127px;
+  margin-top: 34px;
+  margin-left: 6px;
+  border-radius: 45%;
+  box-shadow: 3px 3px 3px 3px rgba(0,0,0,.5);
 }
 
 .ranksuit {
@@ -130,24 +140,37 @@ main {
   text-align: center;
   line-height: 26px;
   width: 25px;
-  margin-left: 1px;
+  margin-left: 4px;
+}
+
+.ranksuitright {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  text-align: center;
+  line-height: 26px;
+  width: 25px;
+  margin-right: auto;
+  margin-top: auto;
+  transform: rotate(180deg);
 }
 
 #hold-container{
   display: flex;
-  height: 45px;
-  width: 1198px;
+  height: 40px;
+  width: 1202px;
+  padding-bottom: 2px;
   justify-content: space-around;
   align-items: center;
-  background-color: #757575;
-  border: 2px solid black;
-  border-radius: 10px;
+  background-color: mediumblue;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
 }
 
 .hold {
   font-family: 'Montserrat', sans-serif;
-  width: 130px;
-  height: 40px;
+  width: 90px;
+  height: 33px;
   background-color: #FFD700;
   color: white;
   font-size: 20px;
@@ -155,14 +178,17 @@ main {
 }
 
 #bottombar {
-  width: 1298px;
+  width: 1310px;
   height: 60px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: #757575;
-  border: 2px solid black;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: inset 0 0 1em white, 0 0 1em rgba(0,0,0,.8);
+  margin-left: -7px;
+  margin-top: -3px;
 }
 
 #credits {
@@ -171,20 +197,20 @@ main {
   font-size: 30px;
   text-shadow: 2px 2px black;
   width: 250px;
-  height: 45px;
+  height: 42px;
   text-align: center;
   line-height: 45px;
   box-shadow: 1px 1px 1px 1px rgba(0,0,0,.5);
 }
 
-#betmax {
+#bet {
   font-family: 'Montserrat', sans-serif;
   background-color: #FFD700;
   color: white;
   font-size: 30px;
   text-shadow: 2px 2px black;
   width: 200px;
-  height: 48px;
+  height: 45px;
 }
 
 #deal {
@@ -194,5 +220,130 @@ main {
   font-size: 30px;
   text-shadow: 2px 2px black;
   width: 200px;
-  height: 48px;
+  height: 45px;
+}
+
+.redtwo{
+  background-image: url('gamepics/aemiro.jpeg');
+  background-size: 100% 100%;
+}
+
+.redthree{
+  background-image: url('gamepics/aileen.jpeg');
+  background-size: 100% 100%;
+}
+
+.redfour{
+  background-image: url('gamepics/amzad.jpeg');
+  background-size: 100% 100%;
+}
+
+.redfive{
+  background-image: url('gamepics/sajil.jpeg');
+  background-size: 100% 100%;
+}
+
+.redsix{
+  background-image: url('gamepics/chris.jpeg');
+  background-size: 100% 100%;
+}
+
+.redseven{
+  background-image: url('gamepics/darren.jpeg');
+  background-size: 100% 100%;
+}
+
+.redeight{
+  background-image: url('gamepics/liana.jpeg');
+  background-size: 100% 100%;
+}
+
+.rednine{
+  background-image: url('gamepics/max.jpeg');
+  background-size: 100% 100%;
+
+}
+
+.redten{
+  background-image: url('gamepics/kate.jpeg');
+  background-size: 100% 100%;
+
+}
+
+
+.blacktwo{
+  background-image: url('gamepics/md.jpeg');
+  background-size: 100% 100%;
+}
+
+.blackthree{
+  background-image: url('gamepics/muhammad.jpeg');
+  background-size: 100% 100%;
+}
+
+.blackfour{
+  background-image: url('gamepics/rich.jpeg');
+  background-size: 100% 100%;
+}
+
+.blackfive{
+  background-image: url('gamepics/jason.jpeg');
+  background-size: 100% 100%;
+}
+
+.blacksix{
+  background-image: url('gamepics/silvia.jpeg');
+  background-size: 100% 100%;
+}
+
+.blackseven{
+  background-image: url('gamepics/winston.jpeg');
+  background-size: 100% 100%;
+}
+
+.blackeight{
+  background-image: url('gamepics/zarrina.jpeg');
+  background-size: 100% 100%;
+}
+
+.blacknine{
+  background-image: url('gamepics/angel.jpeg');
+  background-size: 100% 100%;
+
+}
+
+.ten{
+  background-image: url('gamepics/kate.jpeg');
+  background-size: 100% 100%;
+
+}
+
+.jack {
+  background-image: url('gamepics/jack.jpg');
+  background-size: cover;
+}
+
+.queen {
+  background-image: url('gamepics/queen.jpg');
+  background-size: cover;
+}
+
+.king {
+  background-image: url('gamepics/king.jpg');
+  background-size: cover;
+}
+
+.ace{
+  background-image: url('gamepics/ace.JPG');
+  background-size: cover;
+}
+
+footer {
+  height: 200px;
+  width: 1276px;
+  border: 17px solid #757575;
+  background-color: black;
+  border-radius: 10px;
+  margin-top: 1px;
+  box-shadow: 0 0 1em rgba(0,0,0,.9);
 }
