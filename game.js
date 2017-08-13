@@ -567,50 +567,54 @@ function checkWin1(hand){
   let $message = $('#message');
   $message.empty();
   if (royalFlush(hand)){
-    $message.html(`Hold up. You were dealt a Royal Flush!!!`);
+    $message.html(`Hold up. Royal Flush!!!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (straightFlush(hand)){
-    $message.html(`Hold up. You were dealt a Straight Flush!`);
+    $message.html(`Hold up. Straight Flush!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (fourKind(hand)){
-    $message.html(`Hold up. You were dealt Four of a Kind!`);
+    $message.html(`Hold up. Four of a Kind!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (fullHouse(hand)){
-    $message.html(`Hold up. You were dealt a Full House!`);
+    $message.html(`Hold up. Full House!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (flush(hand)){
-    $message.html(`Hold up. You were dealt a Flush!`);
+    $message.html(`Hold up. Flush!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (straight(hand)){
-    $message.html(`Hold up. You were dealt a Straight!`);
+    $message.html(`Hold up. Straight!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (threeKind(hand)){
-    $message.html(`Hold up. You were dealt Three of a Kind!`);
+    $message.html(`Hold up. Three of a Kind!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (twoPair(hand)){
-    $message.html(`Hold up. You were dealt Two Pair!`);
+    $message.html(`Hold up. Two Pair!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (jacksOB(hand)){
-    $message.html(`Hold up. You were dealt Jacks or Better.`);
+    $message.html(`Hold up. Jacks or Better.`);
     document.querySelector('#winalert').play();
     return;
+  }else{
+    $message.html(`Click to Hold & Deal`);
+    return;
   }
+
 }
 
 function checkWin2(hand){
@@ -680,7 +684,7 @@ function checkWin2(hand){
     document.querySelector('#job').play();
     return;
   }else{
-    $message.html(`Game over. Try again.`);
+    $message.html(`Game &#9785ver`);
     document.querySelector('#dealout').play();
     return;
   }
