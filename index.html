@@ -5,10 +5,17 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- <script type="text/javascript" src="events.js"></script> -->
   <script type="text/javascript" src="game.js"></script>
 </head>
-<body>
+<body class="landinglock">
+  <div id="landingpage">
+    <section id="maintitle">Video Poker</section>
+    <div id="subtitle">Enter your name and press Start</div>
+    <div id="inputcontain">
+      <input type="text" placeholder="Enter Name">
+      <button id="nameinput">START</button>
+    </div>
+  </div>
   <main>
     <section id="header">
       <div id="winninghands">
@@ -34,7 +41,7 @@
         <p>5</p>
       </div>
       <div id="playeroutput">
-        <output id="message">Place Bet</output>
+        <output id="message"></output>
       </div>
     </section>
     <section id="boardhold">
@@ -69,8 +76,23 @@
     </section>
   </main>
   <footer>
+    <div id="howto">
+      <div id="examplehead">Winning Hands Explained</div>
+      <ul>
+        <li>Royal Flush: 10 J Q K A of same suit</li>
+        <li>Straight Flush: Ordered rank sequence of same suit</li>
+        <li>Four of a Kind: 4 cards of same rank</li>
+        <li>Full House: 3 of a kind with a pair</li>
+        <li>Flush: Any 5 cards of same suit</li>
+        <li>Straight: Any ordered rank sequence</li>
+        <li>Three of a Kind: 3 cards of same rank</li>
+        <li>Two Pair: 2 pairs of cards of same rank</li>
+        <li>Jacks or Better: Any card pair of 10 J Q K A rank</li>
+      </ul>
+    </div>
     <div id="base"></div>
   </footer>
+  <audio id="opener" src="fx/opener.mp3" type="audio/mp3"></audio>
   <audio id="coindrop" src="fx/coindrop.mp3" type="audio/mp3"></audio>
   <audio id="dealout" src="fx/dealout.mp3" type="audio/mp3"></audio>
   <audio id="job" src="fx/job.mp3" type="audio/mp3"></audio>
@@ -78,5 +100,6 @@
   <audio id="goodwin" src="fx/goodwin.mp3" type="audio/mp3"></audio>
   <audio id="bigwin" src="fx/bigwin.mp3" type="audio/mp3"></audio>
   <audio id="winalert" src="fx/winalert.mp3" type="audio/mp3"></audio>
+  <audio id="theend" src="fx/theend.mp3" type="audio/mp3"></audio>
 </body>
 </html>

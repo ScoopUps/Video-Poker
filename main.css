@@ -1,8 +1,78 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: rgba(195, 195, 195, 0.9);
+}
+
+.landinglock {
+  overflow-y: hidden;
+}
+
+#landingpage {
+  height: 613px;
+  width: 1276px;
+  border: 17px solid #757575;
+  background-color: black;
+  border-radius: 10px;
+  justify-content: center;
+  margin-bottom: 3px;
+}
+
+#maintitle{
+  font-size: 96px;
+  line-height: 161px;
+  letter-spacing: -3px;
+  font-family: 'Press Start 2P', cursive;
+  height: 150px;
+  width: 1220px;
+  text-align: center;
+  background-color: mediumblue;
+  color: white;
+  margin: 68px auto 10px;
+  text-shadow: 9px 9px black;
+  border-radius: 10px;
+}
+
+#subtitle{
+  font-size: 20px;
+  line-height: 100px;
+  letter-spacing: -3px;
+  font-family: 'Press Start 2P', cursive;
+  height: 100px;
+  width: 650px;
+  text-align: center;
+  background-color: mediumblue;
+  color: white;
+  margin: 68px auto 10px;
+  text-shadow: 9px 9px black;
+  border-radius: 10px;
+}
+
+#inputcontain{
+  display: flex;
+  justify-content: center;
+  margin-top: 75px;
+}
+
+input {
+  height: 33px;
+  width: 140px;
+  background-color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-right: 26px;
+}
+
+#nameinput{
+  height: 40px;
+  width: 100px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #FFD700;
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px black;
 }
 
 main {
@@ -346,3 +416,42 @@ footer {
   margin-top: 1px;
   box-shadow: 0 0 1em rgba(0,0,0,.9);
 }
+
+#howto {
+    font-size: 15px;
+    width: 560px;
+    height: 226px;
+    display: inline-block;
+    float: left;
+    margin-left: 40px;
+    margin-top: 36px;
+    border-radius: 10px;
+    color: white;
+    background-color: mediumblue;
+}
+
+#examplehead{
+  margin-left: 20px;
+  margin-top: 9px;
+  margin-bottom: -5px;
+  text-shadow: 2px 2px black;
+}
+
+#howto ul li {
+  text-shadow: 2px 2px black;
+}
+
+#base {
+    background-image: url(gamepics/gabig.jpg);
+    background-size: cover;
+    width: 560px;
+    height: 226px;
+    display: inline-block;
+    float: right;
+    margin-right: 40px;
+    margin-top: 36px;
+    border-radius: 10px;
+    text-shadow: 2px 2px black;
+}
+
+

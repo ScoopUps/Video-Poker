@@ -111,6 +111,8 @@ const board = [];
 let credits = 80;
 //variable to check within dealer function if bet has been made
 let hasBet = false;
+//variable to store name input
+let name = "";
 
 //HELPER FUNCTIONS FOR GENERAL GAME!!!
 
@@ -252,7 +254,8 @@ function bettor(){
     killListeners();
     let $finalMessage = $('#message');
     $finalMessage.empty();
-    $finalMessage.html('That\'s it. You\'re cut off.' + '</br>' + 'Call Gambler\'s Anonymous: 1-800-522-4700');
+    document.querySelector('#theend').play();
+    $finalMessage.html(`That\'s it, ${name}. You\'re cut off.` + `</br>` + `Call Gambler\'s Anonymous: 1-800-522-4700`);
     return;
   }
   //set bet to true
@@ -567,51 +570,51 @@ function checkWin1(hand){
   let $message = $('#message');
   $message.empty();
   if (royalFlush(hand)){
-    $message.html(`Hold up. Royal Flush!!!`);
+    $message.html(`Hold up, ${name}. You have a Royal Flush!!!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (straightFlush(hand)){
-    $message.html(`Hold up. Straight Flush!`);
+    $message.html(`Hold up, ${name}. You have a Straight Flush!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (fourKind(hand)){
-    $message.html(`Hold up. Four of a Kind!`);
+    $message.html(`Hold up, ${name}. You have Four of a Kind!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (fullHouse(hand)){
-    $message.html(`Hold up. Full House!`);
+    $message.html(`Hold up, ${name}. You have a Full House!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (flush(hand)){
-    $message.html(`Hold up. Flush!`);
+    $message.html(`Hold up, ${name}. You have a Flush!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (straight(hand)){
-    $message.html(`Hold up. Straight!`);
+    $message.html(`Hold up, ${name}. You have a Straight!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (threeKind(hand)){
-    $message.html(`Hold up. Three of a Kind!`);
+    $message.html(`Hold up, ${name}. You have Three of a Kind!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (twoPair(hand)){
-    $message.html(`Hold up. Two Pair!`);
+    $message.html(`Hold up, ${name}. You have Two Pair!`);
     document.querySelector('#winalert').play();
     return;
   }
   if (jacksOB(hand)){
-    $message.html(`Hold up. Jacks or Better.`);
+    $message.html(`Hold up, ${name}. You have Jacks or Better.`);
     document.querySelector('#winalert').play();
     return;
   }else{
-    $message.html(`Click to Hold & Deal`);
+    $message.html(`Click to Hold cards & Deal`);
     return;
   }
 
@@ -711,7 +714,21 @@ $(document).ready(function(){
   $('#deal').on('click', dealer);
 
 
+  $('#nameinput').on('click', function() {
+    let $name = $('input').val();
+    if($name === ""){
+      return;
+    }
+    console.log($name);
+    name = $name.charAt(0).toUpperCase() + $name.slice(1);
+    $('#landingpage').animate({marginTop: "-655px"}, 3000);
+    document.querySelector('#opener').play();
+    $('body').removeClass("landinglock");
+    $('#message').html(`Welcome, ${name}. Place your bet`);
+});
+
 });
 
 //CITATIONS
 //“Sound effects obtained from https://www.zapsplat.com”
+//Ivan suggested Listento for youtube mp3 downloads
