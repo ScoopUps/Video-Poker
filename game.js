@@ -173,13 +173,13 @@ function dealBoard(){
       $cards[p].css('color', board[p].color);
       //attempt at flip animation
       $cards[p].animate({
-      height: 'toggle'
-    }, 150, "linear");
+      width: 'toggle'
+    }, 100, "linear");
       //add visual card representation into unheld card position
       $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
       $cards[p].animate({
-      height: 'toggle'
-      }, 150, "linear");
+      width: 'toggle'
+      }, 100, "linear");
       $cards[p].children('.innercard').css('border-color', board[p].color);
       $cards[p].children('.innercard').toggleClass(board[p].styleClass);
     }
@@ -301,14 +301,14 @@ function bettor(){
     $cards[p].css('color', board[p].color);
     //jQuery animate method to toggle the height up
     $cards[p].animate({
-      height: 'toggle'
-    }, 150, "linear");
+      width: 'toggle'
+    }, 100, "linear");
     //jquery html method to produce visual representation of card
     $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
     //jQuery animate method to toggle the height down
     $cards[p].animate({
-      height: 'toggle'
-    }, 150, "linear");
+      width: 'toggle'
+    }, 100, "linear");
     //change the inner card border to appropriate color
     $cards[p].children('.innercard').css('border-color', board[p].color);
     $cards[p].children('.innercard').toggleClass(board[p].styleClass);
@@ -741,15 +741,22 @@ $(document).ready(function(){
 
 
   $('#nameinput').on('click', function() {
+    //store input value in variable $name
     let $name = $('input').val();
+    //return if input is empty string
     if($name === ""){
       return;
     }
     console.log($name);
+    //take the input and store in global variable uppercasing the first letter
     name = $name.charAt(0).toUpperCase() + $name.slice(1);
+    //make the landing page disappear in 3 seconds
     $('#landingpage').animate({marginTop: "-814px"}, 3000);
+    //play opening music
     document.querySelector('#opener').play();
+    //remove the scroll lock from body
     $('body').removeClass("landinglock");
+    //cue initial output message
     $('#message').html(`Welcome, ${name}. Place your bet`);
 });
 

@@ -206,6 +206,12 @@ main {
   background-color: mediumblue;
 }
 
+.cardholder {
+  height: 300px;
+  width: 200px;
+  background-color: mediumblue;
+}
+
 .card {
   border: 3px solid black;
   height: 300px;
@@ -231,7 +237,7 @@ main {
   width: 127px;
   margin-top: 34px;
   margin-left: 6px;
-  border-radius: 45%;
+  border-radius: 50%;
   box-shadow: 3px 3px 3px 3px rgba(0,0,0,.5);
 }
 
@@ -485,6 +491,3 @@ footer {
     text-shadow: 2px 2px black;
 }
 
-.flip {
-  transform: rotateY(360deg);
-}
