@@ -721,7 +721,7 @@ $(document).ready(function(){
     }
     console.log($name);
     name = $name.charAt(0).toUpperCase() + $name.slice(1);
-    $('#landingpage').animate({marginTop: "-655px"}, 3000);
+    $('#landingpage').animate({marginTop: "-814px"}, 3000);
     document.querySelector('#opener').play();
     $('body').removeClass("landinglock");
     $('#message').html(`Welcome, ${name}. Place your bet`);
