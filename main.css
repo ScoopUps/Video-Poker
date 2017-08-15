@@ -35,15 +35,15 @@ body {
 }
 
 #mast{
-  height: 200px;
-  width: 1000px;
+  height: 225px;
+  width: 825px;
+  padding-right: 10px;
   background-color: mediumblue;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  margin: 40px auto;
-  padding: 10px 0px;
+  margin: 50px auto;
 }
 
 .mastred {
@@ -88,6 +88,12 @@ input {
   font-size: 20px;
   text-align: center;
   margin-right: 26px;
+}
+
+input::placeholder {
+  color: rgba(75, 75, 75, 0.5);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
 }
 
 #nameinput{
@@ -479,4 +485,6 @@ footer {
     text-shadow: 2px 2px black;
 }
 
-
+.flip {
+  transform: rotateY(360deg);
+}

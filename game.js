@@ -171,6 +171,8 @@ function dealBoard(){
       board[p] = deck.pop();
       //add red styling for hearts/diamonds
       $cards[p].css('color', board[p].color);
+      //attempt at flip animation
+      $cards[p].css('transform', 'rotateY('+360+'deg)');
       //add visual card representation into unheld card position
       $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
       $cards[p].children('.innercard').css('border-color', board[p].color);
@@ -285,6 +287,8 @@ function bettor(){
   for(let p = 0; p<board.length; p++){
     $cards[p].removeClass('placeholder');
     $cards[p].css('color', board[p].color);
+    //attempt at flip animation
+    $cards[p].css('transform', 'rotateY('+360+'deg)');
     $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
     $cards[p].children('.innercard').css('border-color', board[p].color);
     $cards[p].children('.innercard').toggleClass(board[p].styleClass);
