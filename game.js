@@ -11,7 +11,7 @@ class Card {
     this.suit = suit;
     //set initial color to black
     this.color = 'black';
-    this.styleClass = "url('gamepics/aemiro.jpeg')";
+    this.styleClass = "";
     //if suit is a heart or diamond, set the color to red
     if (this.suit === '&#9829' || this.suit === '&#9830'){
       this.color = 'red';
@@ -131,7 +131,7 @@ function popDeck(){
 //helper function to shuffle the deck array
 function shuffle(deck){
   //randomize number of times to shuffle; scattering the deck
-  let numOfShuffles = Math.floor(Math.random()* 1980);
+  let numOfShuffles = Math.floor(Math.random()* 10000);
   for (let n = 0; n<numOfShuffles; n++){
     //sort the deck using a randomizer by the num of shuffles variable
     deck.sort(function(a,b){
@@ -172,9 +172,14 @@ function dealBoard(){
       //add red styling for hearts/diamonds
       $cards[p].css('color', board[p].color);
       //attempt at flip animation
-      $cards[p].css('transform', 'rotateY('+360+'deg)');
+      $cards[p].animate({
+      height: 'toggle'
+    }, 150, "linear");
       //add visual card representation into unheld card position
       $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
+      $cards[p].animate({
+      height: 'toggle'
+      }, 150, "linear");
       $cards[p].children('.innercard').css('border-color', board[p].color);
       $cards[p].children('.innercard').toggleClass(board[p].styleClass);
     }
@@ -244,7 +249,12 @@ function dealer(){
   $('#deal').off('click');
   $('.hold').off('click');
   //check for final win and reattach event listeners
-  checkWin2(board);
+  //timeout variable to delay win check by 400ms
+  let timer = window.setTimeout(function(){
+    //check for final win and reattach event listeners
+    checkWin2(board)}, 400);
+  //call timer function to check win
+  timer();
   //reset bet to false
   hasBet = false;
 }
@@ -285,15 +295,29 @@ function bettor(){
   let $cards = [$card1, $card2, $card3, $card4, $card5];
   //for loop to render cards
   for(let p = 0; p<board.length; p++){
+    //remove placeholder card class
     $cards[p].removeClass('placeholder');
+    //alter css color for text
     $cards[p].css('color', board[p].color);
-    //attempt at flip animation
-    $cards[p].css('transform', 'rotateY('+360+'deg)');
+    //jQuery animate method to toggle the height up
+    $cards[p].animate({
+      height: 'toggle'
+    }, 150, "linear");
+    //jquery html method to produce visual representation of card
     $cards[p].html('<span class="ranksuit">' + board[p].rank + '</br>'  + board[p].suit + '</span><div class="innercard"></div><span class="ranksuitright">' + board[p].rank + '</br>'  + board[p].suit + '</span>');
+    //jQuery animate method to toggle the height down
+    $cards[p].animate({
+      height: 'toggle'
+    }, 150, "linear");
+    //change the inner card border to appropriate color
     $cards[p].children('.innercard').css('border-color', board[p].color);
     $cards[p].children('.innercard').toggleClass(board[p].styleClass);
   }
-  checkWin1(tempBoard);
+  //timer variable to delay check win by 400mx
+  let timer = window.setTimeout(function(){
+    checkWin1(tempBoard)}, 400);
+  //call timer
+  timer();
   $('#bet').off('click');
 }
 
@@ -696,8 +720,6 @@ function checkWin2(hand){
     return;
   }
 }
-
-
 
 
 //EVENT LISTENERS!!!
