@@ -9,6 +9,8 @@ I chose this game because my mom really likes to play it. I already have a built
 ## Wireframe
 
 ![](images/image1.JPG)
+![](images/image2.JPG)
+![](images/image3.JPG)
 
 ## Initial thoughts on game structure
 
