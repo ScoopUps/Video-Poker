@@ -81,9 +81,21 @@ body {
   margin-top: 20px;
 }
 
+#mute1 {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    color: black;
+    background-color: #FFD700;
+    border-radius: 50%;
+    outline: none;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
 input {
   height: 33px;
-  width: 140px;
+  width: 160px;
   background-color: white;
   font-size: 20px;
   text-align: center;
@@ -172,7 +184,7 @@ main {
 }
 
 
-#mute {
+#mute2 {
     width: 30px;
     height: 30px;
     font-size: 16px;
@@ -505,6 +517,5 @@ footer {
     margin-top: 36px;
     border-radius: 10px;
     text-shadow: 2px 2px black;
-    position: absolute;
 }
 

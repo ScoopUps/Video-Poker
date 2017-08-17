@@ -761,32 +761,19 @@ $(document).ready(function(){
 });
 
   //click event on button to toggle audio on/off
-  $('#mute').on('click', function(){
+  $('.mute').on('click', function(){
     if ($('audio').prop('muted') === false){
-      $('#mute').css('background-color', 'red');
+      $('.mute').css('background-color', 'black');
+      $('.mute').css('color', 'white');
       return $('audio').prop('muted', true);
     } else if ($('audio').prop('muted') === true){
-      $('#mute').css('background-color', '#FFD700');
+      $('.mute').css('background-color', '#FFD700');
+      $('.mute').css('color', 'black');
       return $('audio').prop('muted', false);
     }
-    console.log($('audio').prop('muted'));
-  })
+  });
 
-//   let mute = document.querySelector('#mute');
-//   mute.addEventListener('click', function(){
-//     let audio = document.getElementsByTagName('audio');
-//     for (let j = 0; j<audio.length; j++){
-//       console.log(audio[j]);
-//     }
-//     debugger;
-//     if (audio.muted === false){
-//       mute.style.backgroundColor = 'red';
-//       return audio.muted = true;
-//     }else if (audio.muted === true){
-//       mute.style.backgroundColor = '#FFD700';
-//       return audio.muted = false;
-//   }
-// });
+
 
 
 });
