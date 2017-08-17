@@ -1,4 +1,4 @@
-console.log('Game.js is ready')
+
 
 
 //create card class
@@ -252,9 +252,9 @@ function dealer(){
   //timeout variable to delay win check by 400ms
   let timer = window.setTimeout(function(){
     //check for final win and reattach event listeners
-    checkWin2(board)}, 400);
-  //call timer function to check win
-  timer();
+    checkWin2(board)}, 300);
+  //call timer to check win
+  timer;
   //reset bet to false
   hasBet = false;
 }
@@ -315,9 +315,9 @@ function bettor(){
   }
   //timer variable to delay check win by 400mx
   let timer = window.setTimeout(function(){
-    checkWin1(tempBoard)}, 400);
+    checkWin1(tempBoard)}, 300);
   //call timer
-  timer();
+  timer;
   $('#bet').off('click');
 }
 
@@ -759,6 +759,35 @@ $(document).ready(function(){
     //cue initial output message
     $('#message').html(`Welcome, ${name}. Place your bet`);
 });
+
+  //click event on button to toggle audio on/off
+  $('#mute').on('click', function(){
+    if ($('audio').prop('muted') === false){
+      $('#mute').css('background-color', 'red');
+      return $('audio').prop('muted', true);
+    } else if ($('audio').prop('muted') === true){
+      $('#mute').css('background-color', '#FFD700');
+      return $('audio').prop('muted', false);
+    }
+    console.log($('audio').prop('muted'));
+  })
+
+//   let mute = document.querySelector('#mute');
+//   mute.addEventListener('click', function(){
+//     let audio = document.getElementsByTagName('audio');
+//     for (let j = 0; j<audio.length; j++){
+//       console.log(audio[j]);
+//     }
+//     debugger;
+//     if (audio.muted === false){
+//       mute.style.backgroundColor = 'red';
+//       return audio.muted = true;
+//     }else if (audio.muted === true){
+//       mute.style.backgroundColor = '#FFD700';
+//       return audio.muted = false;
+//   }
+// });
+
 
 });
 
